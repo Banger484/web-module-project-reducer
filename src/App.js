@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react';
 import reducer, { initialState } from './reducers';
 import './App.css';
-import { applyNumber,changeOperation } from './actions';
+import { applyNumber,changeOperation, clearDisplay, memorySave, memoryRecall, memoryClear } from './actions';
 import TotalDisplay from './components/TotalDisplay';
 import CalcButton from './components/CalcButton';
 
@@ -15,6 +15,19 @@ function App() {
   const handleOperationClick = (operation) => {
     dispatch(changeOperation(operation))
   }
+  const handleClearClick = () => {
+    dispatch(clearDisplay())
+  }
+  const handleMemorySaveClick = () => {
+    dispatch(memorySave())
+  }
+  const handleMemoryRecallClick = () => {
+    dispatch(memoryRecall())
+  }
+  const handleMemoryClearClick = () => {
+    dispatch(memoryClear())
+  }
+  
   return (
     <div className="App">
       <nav className="navbar navbar-dark bg-dark">
@@ -32,9 +45,9 @@ function App() {
             </div>
             
             <div className="row">
-              <CalcButton value={"M+"}/>
-              <CalcButton value={"MR"}/>
-              <CalcButton value={"MC"}/>
+              <CalcButton value={"M+"} onClick={() => handleMemorySaveClick()}/>
+              <CalcButton value={"MR"} onClick={() => handleMemoryRecallClick()}/>
+              <CalcButton value={"MC"} onClick={() => handleMemoryClearClick()}/>
             </div>
 
             <div className="row">
@@ -62,7 +75,7 @@ function App() {
             </div>
 
             <div className="row ce_button">
-              <CalcButton value={"CE"}/>
+              <CalcButton value={"CE"} onClick={() => handleClearClick()}/>
             </div>
 
           </form>
